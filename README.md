@@ -32,8 +32,8 @@ Kinn empowers talented home cooks to turn their passion into a business, while g
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/eat-with-kinn.git
-cd eat-with-kinn
+git clone https://github.com/alice5643/eat-with-kinn-public.git
+cd eat-with-kinn-public
 ```
 
 2. Install dependencies:
