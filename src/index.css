@@ -1,0 +1,486 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    @apply text-base text-Mblack font-Poppins;
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1300px;
+}
+
+@media screen and (max-width: 1200px) {
+    .container {
+        max-width: 92%;
+    }
+}
+
+section {
+    padding: 80px 0;
+}
+
+.clamp-1 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.clamp-2 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+/* start:btn */
+.btnClass {
+    @apply px-[24px] py-[12px] rounded-full border border-solid leading-6 inline-block
+}
+
+.btnClass.large {
+    @apply px-[24px] py-[16px]
+}
+
+/* New Button System */
+.btn-primary {
+    display: flex;
+    padding: 6.92px 27.68px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20.76px;
+    background: var(--Knavy, #49507C);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    @apply text-body-md-medium text-white border-none cursor-pointer transition-all duration-300 hover:opacity-90
+}
+
+.btn-secondary {
+    display: flex;
+    padding: 6.92px 27.68px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20.76px;
+    border: 2px solid #49507C;
+    background: var(--Kpink40, #FBEBE5);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    @apply text-body-md-medium text-Knavy cursor-pointer transition-all duration-300 hover:opacity-90
+}
+
+/* end:btn */
+
+.modal-backdrop.show {
+    background-color: rgba(23, 23, 23, 0.08) !important;
+    backdrop-filter: blur(100px);
+}
+
+.fieldInput {
+    @apply bg-transparent h-[58px] px-4 rounded-full border border-solid border-[#E5E5E5] outline-none
+}
+
+.fieldInput:hover,
+.fieldInput:focus,
+.fieldInput:active {
+    @apply bg-transparent h-[58px] px-4 rounded-full border border-solid border-[#E5E5E5] outline-none
+}
+
+.arrowPlus {
+    @apply relative p-[0.3rem]
+}
+
+.arrowPlus span {
+    transition: .5s;
+    @apply inline-block w-full h-[1px] bg-Mblack absolute
+}
+
+.arrowPlus span:nth-child(1) {
+    @apply top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+}
+
+.arrowPlus span:nth-child(2) {
+    @apply top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[90deg]
+}
+
+.arrowPlus.active span {
+    @apply top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[0]
+}
+
+.barIcon {
+    @apply flex flex-wrap gap-1
+}
+
+.barIcon div {
+    @apply w-full h-[2px] inline-block bg-white rounded-sm transition-all duration-500
+}
+
+.barIcon div {
+    @apply w-full h-[2px] inline-block bg-white rounded-sm transition-all duration-500
+}
+
+.barIcon.active div:nth-child(1) {
+    @apply absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 rotate-45
+}
+
+.barIcon.active div:nth-child(2) {
+    @apply hidden
+}
+
+.barIcon.active div:nth-child(3) {
+    @apply absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 -rotate-45
+}
+
+.menuMobile {
+    @apply left-0 -top-[100vh] lg:hidden transition-all duration-500
+}
+
+.menuMobile.active {
+    @apply top-0
+}
+
+.bgDropPopup {
+    background: rgba(23, 23, 23, 0.08);
+    backdrop-filter: blur(4px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollStyle::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 100%;
+}
+
+/* Track */
+.scrollStyle::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.scrollStyle::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+.scrollStyle::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.sliderDots .slick-dots li button::before {
+    @apply text-[8px] !text-[#E5E5E5]
+}
+
+.sliderDots .slick-dots li.slick-active button::before {
+    @apply text-[12px] !text-Myellow
+}
+
+.sliderDots .slick-dots {
+    @apply -bottom-[3rem]
+}
+
+.modalTicket .modal-dialog .modal-content {
+    @apply border-none bg-transparent
+}
+
+.modalTicket .modal-dialog .modal-content .modal-body {
+    @apply bg-white rounded-[24px] !p-[2rem] overflow-hidden
+}
+
+.stepForm .items {
+    @apply relative
+}
+
+.stepForm .items::after {
+    content: "";
+    @apply absolute w-full md:w-[1px] h-[1px] md:h-full bg-[#E5E5E5] left-[5rem] md:left-[1.3rem] top-[1.4rem] md:top-auto md:-bottom-[3rem]
+}
+
+.stepForm .items:last-child::after {
+    content: "";
+    @apply !bg-white
+}
+
+.stepForm .items.active::after {
+    @apply bg-Myellow
+}
+
+.stepForm .items.active .number {
+    @apply text-Myellow !bg-[#F3FCF9] !border-Myellow
+}
+
+.phoneModFiled input.form-control {
+    @apply hidden
+}
+
+.phoneModFiled .flag-dropdown .selected-flag .flag .arrow {
+    @apply hidden
+}
+
+.phoneModFiled .flag-dropdown {
+    @apply !bg-transparent !border-hidden !rounded-none
+}
+
+.paginationnCustom {
+    @apply gap-2
+}
+
+.paginationnCustom li a {
+    @apply text-Mblack border border-solid !border-[#E5E5E5] focus:bg-white focus:shadow-none !rounded-full w-[38px] h-[38px]
+}
+
+.paginationnCustom li span {
+    @apply w-[38px] h-[38px]
+}
+
+.paginationnCustom li {
+    @apply flex-shrink-0
+}
+
+.paginationnCustom li.active span {
+    @apply !bg-Myellow !border-Myellow
+}
+
+.paginationnCustom li span {
+    @apply rounded-full
+}
+
+/* verificaion */
+.wrapVerification .vi__wrapper {
+    @apply w-full
+}
+
+.wrapVerification .vi__wrapper .wrap {
+    @apply flex items-center justify-between w-full gap-4
+}
+
+.wrapVerification .vi__wrapper .wrap .character {
+    flex-basis: auto;
+    flex-grow: unset;
+    @apply w-[56px] h-[56px] rounded-full
+}
+
+.wrapVerification .vi__wrapper .wrap .character {
+    @apply font-bold text-[24px] text-Mblack
+}
+
+.wrapVerification .vi__wrapper .wrap .character:where(.vi__character--inactive) {
+    @apply bg-[#FAFAFA] border-[#F5F5F5]
+}
+
+.wrapVerification .vi__wrapper .wrap .character:where(.vi__character) {
+    @apply bg-[#FAFAFA] border-[#F5F5F5]
+}
+
+.wrapVerification .vi__wrapper .wrap .character:where(.vi__character--selected) {
+    outline: 2px solid #793EF1;
+    @apply text-Myellow
+}
+
+/* verificaion */
+
+
+
+
+/* date style */
+
+.dateFormat {
+    border: 1px solid #FFFFFF;
+    border-radius: 27.5897px;
+    padding: 1rem;
+}
+
+.dateFormat .react-datepicker__header {
+    background-color: transparent;
+    border: none;
+}
+
+.dateFormat .react-datepicker__header .react-datepicker__day-names .react-datepicker__day-name {
+    @apply text-Mblack font-medium text-[16px]
+}
+
+.dateFormat .react-datepicker__navigation {
+    top: 10px;
+}
+
+.dateFormat .react-datepicker {
+    width: 100%;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+}
+
+.dateFormat .react-datepicker button .react-datepicker__navigation-icon::before {
+    @apply !border-Mblack
+}
+
+.dateFormat .react-datepicker__month-container {
+    width: 100%;
+}
+
+.dateFormat .react-datepicker__month {
+    margin: 0;
+}
+
+.dateFormat .react-datepicker__current-month {
+    @apply text-Mblack pb-[1rem]
+}
+
+.dateFormat .react-datepicker__day-name,
+.dateFormat .react-datepicker__day,
+.dateFormat .react-datepicker__time-name {
+    width: 2.2rem;
+    line-height: 2.2rem;
+}
+
+.dateFormat .react-datepicker__day {
+    @apply text-Mblack
+}
+
+.dateFormat .react-datepicker__day--selected {
+    background: #FEC51C;
+    border: 1.14957px solid #A0C0AD;
+    border-radius: 50%;
+}
+
+.dateFormat .react-datepicker__day--selected:hover {
+    background: #FEC51C;
+    border: 1.14957px solid #A0C0AD;
+    border-radius: 50%;
+}
+
+.dateFormat .react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range,
+    .react-datepicker__month-text--in-range,
+    .react-datepicker__quarter-text--in-range,
+    .react-datepicker__year-text--in-range),
+.react-datepicker__month-text--in-selecting-range:not(.react-datepicker__day--in-range,
+    .react-datepicker__month-text--in-range,
+    .react-datepicker__quarter-text--in-range,
+    .react-datepicker__year-text--in-range),
+.react-datepicker__quarter-text--in-selecting-range:not(.react-datepicker__day--in-range,
+    .react-datepicker__month-text--in-range,
+    .react-datepicker__quarter-text--in-range,
+    .react-datepicker__year-text--in-range),
+.react-datepicker__year-text--in-selecting-range:not(.react-datepicker__day--in-range,
+    .react-datepicker__month-text--in-range,
+    .react-datepicker__quarter-text--in-range,
+    .react-datepicker__year-text--in-range) {
+    background-color: #FEC51C;
+}
+
+.dateFormat .react-datepicker__day--keyboard-selected:hover,
+.react-datepicker__month-text--keyboard-selected:hover,
+.react-datepicker__quarter-text--keyboard-selected:hover,
+.react-datepicker__year-text--keyboard-selected:hover {
+    background-color: #FEC51C;
+}
+
+.dateFormat .react-datepicker__day--selected:hover,
+.react-datepicker__day--in-selecting-range:hover,
+.react-datepicker__day--in-range:hover,
+.react-datepicker__month-text--selected:hover,
+.react-datepicker__month-text--in-selecting-range:hover,
+.react-datepicker__month-text--in-range:hover,
+.react-datepicker__quarter-text--selected:hover,
+.react-datepicker__quarter-text--in-selecting-range:hover,
+.react-datepicker__quarter-text--in-range:hover,
+.react-datepicker__year-text--selected:hover,
+.react-datepicker__year-text--in-selecting-range:hover,
+.react-datepicker__year-text--in-range:hover {
+    background-color: #FEC51C !important;
+}
+
+.dateFormat .react-datepicker__day:hover,
+.react-datepicker__month-text:hover,
+.react-datepicker__quarter-text:hover,
+.react-datepicker__year-text:hover {
+    background-color: #FEC51C !important;
+    background: #FEC51C;
+    border: 1.14957px solid #A0C0AD;
+    border-radius: 50%;
+}
+
+.dateFormat .react-datepicker__day--in-range {
+    background: #FEC51C;
+    border: 1.14957px solid #A0C0AD;
+    border-radius: 50%;
+}
+
+.dateFormat .react-datepicker__day--outside-month {
+    @apply !text-[#A3A3A3]
+}
+
+.dateFormat .react-datepicker__day--keyboard-selected {
+    background-color: #FEC51C;
+}
+
+.dateFormat .react-datepicker__week .react-datepicker__day--disabled {
+    @apply text-[#A3A3A3]
+}
+
+/* date style */
+
+/* modal */
+.modalSearch .modal-dialog .modal-content {
+    @apply border-none rounded-[16px] outline-none
+}
+
+/* modal */
+
+.checkboxFIlter {
+    @apply border border-[#D4D4D4]
+}
+
+.checkboxFIlter img {
+    @apply hidden
+}
+
+.checkboxFIlter.active {
+    @apply bg-Myellow border-none
+}
+
+.checkboxFIlter.active img {
+    @apply block
+}
+
+.pagiantionMod .page-link {
+    @apply border-none outline-none shadow-none focus:active:hover:text-Mblack focus:active:hover:border-none focus:active:hover:shadow-none focus:active:hover:outline-none w-[32px] h-[32px] !rounded-full flex items-center justify-center bg-white text-Mblack
+}
+
+.pagiantionMod .page-link {
+    @apply hover:bg-Myellow
+}
+
+.pagiantionMod .page-item.active .page-link {
+    @apply !bg-Myellow !text-Mblack
+}
+
+.radioFIlter ~ label {
+    @apply border border-[#A3A3A3]
+}
+.radioFIlter:checked ~ label {
+    @apply border !border-[#FEC51C]
+}
+.radioFIlter:checked ~ label div {
+    @apply !opacity-100
+}
+
+.radioPayment ~ label label {
+    @apply border border-[#A3A3A3]
+}
+.radioPayment:checked ~ label label {
+    @apply border !border-[#FEC51C]
+}
+.radioPayment:checked ~ label label div {
+    @apply !opacity-100
+}
