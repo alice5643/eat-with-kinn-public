@@ -87,3 +87,22 @@ For questions or support, please contact us at hello@eatwithkinn.com
 ## License
 
 © 2025 Quenra Ltd® All rights reserved.
+
+## Deployment
+
+This project is configured for deployment on Cloudflare Pages.
+
+### Build Configuration
+
+- **Framework preset**: Create React App
+- **Build command**: `npm run build`
+- **Build output directory**: `build`
+- **Node.js version**: 18 or later
+
+### Automatic Deployments
+
+The project is set up for automatic deployments from the `master` branch on GitHub. Every push to the repository will trigger a new build and deployment.
+
+### Custom Domain
+
+The site is configured to run on `eatwithkinn.com` with the included `CNAME` file and `_redirects` file for proper SPA routing.
