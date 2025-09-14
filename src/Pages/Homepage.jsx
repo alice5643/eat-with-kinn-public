@@ -25,7 +25,7 @@ const Homepage = () => {
                                 
                                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                                     <button className="btn-primary">Become a seller</button>
-                                    <button className="btn-secondary">Find local food</button>
+                                    <button className="btn-secondary" onClick={handleShow}>Find local food</button>
                                 </div>
                             </div>
                         </Col>
@@ -43,7 +43,7 @@ const Homepage = () => {
                         <Col lg={6} className='order-2 lg:order-1'>
                             <h2 className='text-h2-normal text-Mblack mb-6'>Better food starts at home.</h2>
                             <p className='text-body-lg-regular text-Mblack mb-8'>We believe the best meals are made by people who care. Kinn connects you to a community of talented home cooks who use simple, wholesome ingredients to create food that's tastier and healthier than typical takeaway. It's food you'd serve to your own family.</p>
-                            <button className="btn-primary">Find Local Food</button>
+                            <button className="btn-primary" onClick={handleShow}>Find Local Food</button>
                         </Col>
                         <Col lg={6} className='order-1 lg:order-2'>
                             <div className="rounded-[20px] overflow-hidden">
