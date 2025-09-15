@@ -5,7 +5,7 @@ import { LogoIcon } from '../Icon/Icon'
 const Footer = () => {
     return (
         <Fragment>
-            <section className='py-16 bg-Kbeige'>
+            <section className='py-16 bg-Koffwhite'>
                 <Container className='relative'>
                     <Row className='mb-12'>
                         <Col className='mb-8 mb-lg-0' lg={6}>

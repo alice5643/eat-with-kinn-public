@@ -13,7 +13,7 @@ const Homepage = () => {
             <ModalFind show={show} handleClose={() => handleClose()} />
 
             {/* start:hero */}
-            <section className='relative overflow-hidden min-h-screen pt-[88px] lg:pt-[98px] -mt-[88px] lg:-mt-[98px] bg-Kbeige flex flex-wrap pb-0'>
+            <section className='relative overflow-hidden min-h-screen pt-[88px] lg:pt-[98px] -mt-[88px] lg:-mt-[98px] bg-Koffwhite flex flex-wrap pb-0'>
                 <Container className='relative z-[2] w-full pt-[80px] relative'>
                     <Row className='justify-center relative z-2'>
                         <Col md={10} lg={8} className='text-center' >
@@ -74,7 +74,7 @@ const Homepage = () => {
             {/* end: explanatory sections */}
 
             {/* About Us Section */}
-            <section className='bg-Kbeige py-[80px]' id="about">
+            <section className='bg-Koffwhite py-[80px]' id="about">
                 <Container>
                     <div className="text-center mb-16">
                         <h2 className='text-h2-normal text-Mblack mb-6'>ABOUT US</h2>
