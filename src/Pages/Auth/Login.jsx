@@ -74,14 +74,13 @@ const Login = () => {
 
                 <div className="my-3 relative">
                     <div className="absolute h-[1px] left-0 w-full top-1/2 -translate-y-1/2 bg-[#F5F5F5]"></div>
-                    <div className='px-4 py-2 bg-white relative inline-block text__12 text-[#525252] relative z-[2]'>Or Log In with</div>
+                    <div className='px-4 py-2 bg-white relative inline-block text__12 text-[#525252] relative z-[2]'>Or</div>
                 </div>
 
-                <div className="w-full">
+                <div className="w-full flex justify-center">
                     <div
                         ref={googleButtonRef}
-                        className="min-h-[44px] rounded-[50px] border border-solid border-[#F5F5F5] flex items-center justify-center"
-                        style={{ minHeight: '44px' }}
+                        className="inline-block"
                     >
                     </div>
                 </div>
