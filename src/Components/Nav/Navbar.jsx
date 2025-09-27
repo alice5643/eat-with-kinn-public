@@ -41,13 +41,12 @@ const Navbar = () => {
                         <li className='w-full'>
                             <a href="mailto:hello@eatwithkinn.com" onClick={() => setToogleMenuResponsive(!ToogleMenuResponsive)} className='text-body-xl-medium text-Mblack'>Contact us</a>
                         </li>
-
-                        {/* Login button hidden for public version */}
-                        {/* 
                         <li className='w-full'>
-                            <a href='/auth/login' className='btn-primary w-full'>Log in</a>
+                            <NavLink to="/founding-sellers" onClick={() => setToogleMenuResponsive(!ToogleMenuResponsive)} className='btn-primary w-full text-center'>Become a Founding Seller</NavLink>
                         </li>
-                        */}
+                        <li className='w-full'>
+                            <NavLink to="/auth/login" onClick={() => setToogleMenuResponsive(!ToogleMenuResponsive)} className='btn-secondary w-full text-center'>Log in</NavLink>
+                        </li>
                     </ul>
                 </Container>
             </div>
@@ -81,12 +80,12 @@ const Navbar = () => {
 
 
                     <div className="flex items-center ml-auto gap-3">
-                        {/* Login button hidden for public version */}
-                        {/* 
                         <div className="lg:inline-block hidden">
-                            <a href='/auth/login' className='btn-primary'>Log in</a>
+                            <NavLink to="/founding-sellers" className='btn-primary'>Become a Founding Seller</NavLink>
                         </div>
-                        */}
+                        <div className="lg:inline-block hidden">
+                            <NavLink to="/auth/login" className='btn-secondary'>Log in</NavLink>
+                        </div>
 
                         <div onClick={() => setToogleMenuResponsive(!ToogleMenuResponsive)} className={"relative px-1 py-1 barIcon w-[30px] h-[30px] cursor-pointer lg:hidden ml-auto " + (ToogleMenuResponsive ? "active" : "")}>
                             <div className={(navabarScroll ? "!bg-Mblack" : ToogleMenuResponsive ? "!bg-Mblack" : "!bg-Mblack")}></div>

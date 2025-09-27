@@ -31,8 +31,8 @@ const Homepage = () => {
                         </Col>
                     </Row>
                 </Container>
-                <div className="w-full max-w-[650px] mx-auto px-4">
-                    <img src="./../images/vision-1.png" className='w-full object-cover relative z-[2]' alt="Food made with love" />
+                <div className="w-full max-w-[1300px] mx-auto px-4">
+                    <img src="/images/vision-1.png" className='w-full object-cover relative z-[2]' alt="Food made with love" />
                 </div>
             </section>
 
@@ -47,7 +47,7 @@ const Homepage = () => {
                         </Col>
                         <Col lg={6} className='order-1 lg:order-2'>
                             <div className="rounded-[20px] overflow-hidden">
-                                <img src="./../images/buyer_section.png" className='w-full h-auto' alt="Buy local food" />
+                                <img src="/images/buyer_section.png" className='w-full h-auto' alt="Buy local food" />
                             </div>
                         </Col>
                     </Row>
@@ -60,7 +60,7 @@ const Homepage = () => {
                     <Row className='items-center gap-y-8'>
                         <Col lg={6}>
                             <div className="rounded-[20px] overflow-hidden">
-                                <img src="./../images/seller_section.png" className='w-full h-auto' alt="Start cooking business" />
+                                <img src="/images/seller_section.png" className='w-full h-auto' alt="Start cooking business" />
                             </div>
                         </Col>
                         <Col lg={6}>

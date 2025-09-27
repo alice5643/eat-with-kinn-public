@@ -48,7 +48,7 @@ module.exports = {
       Knavy: "#49507C",
       Kpink80: "#FDD6C9",
       Kpink40: "#FBEBE5",
-      Kbeige: "#F0E1CE",
+      Koffwhite: "#F5F3F0",
       Kmint: "#E8FFD5",
     },
     screens: {
