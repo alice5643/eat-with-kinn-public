@@ -5,7 +5,6 @@ import {
   useLocation,
 } from "react-router-dom";
 import { useEffect } from 'react';
-import { testSupabaseConnection } from './testAuth';
 
 import DefaultLayout from './Layouts/DefaultLayout';
 import AuthLayout from './Layouts/AuthLayout';
@@ -35,8 +34,6 @@ const App = () => {
   let location = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0)
-    // Test Supabase connection on app load
-    testSupabaseConnection();
   }, [location])
   return (
     <Routes>

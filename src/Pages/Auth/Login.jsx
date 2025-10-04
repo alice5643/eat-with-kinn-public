@@ -10,7 +10,7 @@ import { supabase } from '../../lib/supabase'
 
 const Login = () => {
     const [tooglePassword, settooglePassword] = useState(true)
-    const [toogleChecklist, settoogleChecklist] = useState(false)
+
     const { signInWithGoogle, signInWithPassword, isAuthenticated } = useAuth()
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
@@ -139,7 +139,7 @@ const Login = () => {
 
             {!usePhone ? (
                 <>
-                    <Form.Group className="mb-3" controlId="login-email">
+                    <Form.Group className="mb-3" controlId="login-email-unique">
                         <Form.Label className='font-normal text__14 text-[#A3A3A3]'>Email</Form.Label>
                         <Form.Control
                             type="email"
@@ -150,7 +150,7 @@ const Login = () => {
                         />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="login-password">
+                    <Form.Group className="mb-3" controlId="login-password-unique">
                         <Form.Label className='font-normal text__14 text-[#A3A3A3]'>Password</Form.Label>
                         <div className="relative">
                             <Form.Control
