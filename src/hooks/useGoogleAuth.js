@@ -8,6 +8,10 @@ const useGoogleAuth = () => {
   const [isGoogleLoaded, setIsGoogleLoaded] = useState(false);
 
   useEffect(() => {
+    // DISABLED: Using Supabase OAuth instead
+    console.log('Google Identity Services disabled - using Supabase OAuth');
+    return;
+    
     // Check if Google Client ID is configured
     if (!process.env.REACT_APP_GOOGLE_CLIENT_ID || process.env.REACT_APP_GOOGLE_CLIENT_ID === 'your_google_client_id_here') {
       setError('Google OAuth not configured. Please add your Google Client ID to .env file.');

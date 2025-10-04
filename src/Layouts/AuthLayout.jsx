@@ -15,7 +15,6 @@ const AuthLayout = () => {
                     </Container>
                 </div>
                 <div className='relative h-full bg-white hidden md:!block overflow-hidden'>
-                    
                     <img src="/images/image-710x1024.png" className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[90%] w-auto object-contain z-10' alt="" />
                 </div>
             </div>

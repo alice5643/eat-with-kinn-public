@@ -38,7 +38,7 @@ const NewPassword = () => {
                     <p>Recover your account password</p>
                 </div>
 
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Group className="mb-3" controlId="newpassword-password">
                     <Form.Label className='font-normal text__14 text-[#A3A3A3]'>Password<span className='text-[#ED544E]'>*</span></Form.Label>
                     <div className="relative">
                         <Form.Control type={tooglePassword ? "password" : "text"} placeholder="***************" className='font-medium text__14 bg-[#FAFAFA] h-[54px] rounded-[20px] px-3 outline-none shadow-none focus:outline-none focus:shadow-none border-[#F5F5F5] focus:border-[#F5F5F5] focus:bg-[#FAFAFA]' />
@@ -46,7 +46,7 @@ const NewPassword = () => {
                     </div>
 
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Group className="mb-3" controlId="newpassword-password-confirm">
                     <Form.Label className='font-normal text__14 text-[#A3A3A3]'>New Password<span className='text-[#ED544E]'>*</span></Form.Label>
                     <div className="relative">
                         <Form.Control type={tooglePasswordRNew ? "password" : "text"} placeholder="***************" className='font-medium text__14 bg-[#FAFAFA] h-[54px] rounded-[20px] px-3 outline-none shadow-none focus:outline-none focus:shadow-none border-[#F5F5F5] focus:border-[#F5F5F5] focus:bg-[#FAFAFA]' />

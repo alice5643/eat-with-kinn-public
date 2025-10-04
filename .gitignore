@@ -19,7 +19,23 @@
 .env.test.local
 .env.production.local
 .env.production
+!.env.example
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.env.local
+
+# Documentation and SQL files - keep local only
+*.md
+!README.md
+!LOGIN_FEATURE_FLAG.md
+*.sql
+/supabase/migrations/*.sql
+
+# Development and Debug files
+*Debug*.jsx
+*Test*.jsx
+testAuth.js
+deploy-functions.sh
+/supabase/

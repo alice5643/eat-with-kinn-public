@@ -17,7 +17,7 @@ const ForgotPassword = () => {
             </div>
 
 
-            <Form.Group className="mb-8" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-8" controlId="forgot-email">
                 <Form.Label className='font-normal text__14 text-[#A3A3A3]'>Email address</Form.Label>
                 <Form.Control type="email" placeholder="e.g sanandreas@gmail.com" className='font-medium text__14 bg-[#FAFAFA] h-[54px] rounded-[20px] px-3 outline-none shadow-none focus:outline-none focus:shadow-none border-[#F5F5F5] focus:border-[#F5F5F5] focus:bg-[#FAFAFA]' />
             </Form.Group>

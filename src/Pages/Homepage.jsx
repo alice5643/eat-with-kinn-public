@@ -1,18 +1,25 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import ModalFind from '../Components/Modal/ModalFind'
+import { useAuth } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const Homepage = () => {
-    const [show, setShow] = useState(false);
+    const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleBecomeSellerClick = () => {
+        if (isAuthenticated) {
+            // Redirect to application page if authenticated
+            navigate('/open-your-shop-welcome');
+        } else {
+            // Redirect to login page with redirect parameter
+            navigate('/auth/login?redirect=/open-your-shop-welcome');
+        }
+    };
+
     return (
         <Fragment>
-
-            <ModalFind show={show} handleClose={() => handleClose()} />
-
-            {/* start:hero */}
+            {/* Hero Section */}
             <section className='relative overflow-hidden min-h-screen pt-[88px] lg:pt-[98px] -mt-[88px] lg:-mt-[98px] bg-Koffwhite flex flex-wrap pb-0'>
                 <Container className='relative z-[2] w-full pt-[80px] relative'>
                     <Row className='justify-center relative z-2'>
@@ -22,10 +29,12 @@ const Homepage = () => {
                                     Food Made with Love.<br />For the Community.
                                 </h1>
                                 <p className='text-body-xl-regular leading-[30px] mb-8'>We connect you with passionate local cooks who are serving their community with fresh, homemade meals.</p>
-                                
+
                                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-                                    <button className="btn-primary">Become a seller</button>
-                                    <button className="btn-secondary" onClick={handleShow}>Find local food</button>
+                                    <button className="btn-primary" onClick={handleBecomeSellerClick}>
+                                        Become a seller
+                                    </button>
+                                    <a href="/search" className="btn-secondary">Find local food</a>
                                 </div>
                             </div>
                         </Col>
@@ -36,14 +45,14 @@ const Homepage = () => {
                 </div>
             </section>
 
-            {/* start: Better food section */}
+            {/* Better food section */}
             <section className='bg-Kpink80 py-[80px]' id="how-it-works">
                 <Container>
                     <Row className='items-center gap-y-8'>
                         <Col lg={6} className='order-2 lg:order-1'>
                             <h2 className='text-h2-normal text-Mblack mb-6'>Better food starts at home.</h2>
                             <p className='text-body-lg-regular text-Mblack mb-8'>We believe the best meals are made by people who care. Kinn connects you to a community of talented home cooks who use simple, wholesome ingredients to create food that's tastier and healthier than typical takeaway. It's food you'd serve to your own family.</p>
-                            <button className="btn-primary" onClick={handleShow}>Find Local Food</button>
+                            <a href="/search" className="btn-primary">Find Local Food</a>
                         </Col>
                         <Col lg={6} className='order-1 lg:order-2'>
                             <div className="rounded-[20px] overflow-hidden">
@@ -54,7 +63,7 @@ const Homepage = () => {
                 </Container>
             </section>
 
-            {/* start: Love cooking section */}
+            {/* Love cooking section */}
             <section className='bg-Kmint py-[80px]'>
                 <Container>
                     <Row className='items-center gap-y-8'>
@@ -66,12 +75,11 @@ const Homepage = () => {
                         <Col lg={6}>
                             <h2 className='text-h2-normal text-Mblack mb-6'>Love cooking? Create a shop with us.</h2>
                             <p className='text-body-lg-regular text-Mblack mb-8'>Kinn is your all-in-one platform to run a home-based food business. We give you the tools to manage your products, track orders, and handle payments, so you can focus on what you do best: cooking with passion.</p>
-                            <button className="btn-primary">Get Started</button>
+                            <button onClick={handleBecomeSellerClick} className="btn-primary">Get Started</button>
                         </Col>
                     </Row>
                 </Container>
             </section>
-            {/* end: explanatory sections */}
 
             {/* About Us Section */}
             <section className='bg-Koffwhite py-[80px]' id="about">
