@@ -102,8 +102,8 @@ const Navbar = () => {
                                 <li className='w-full'>
                                     <NavLink to="/founding-sellers" onClick={() => setToogleMenuResponsive(!ToogleMenuResponsive)} className='btn-primary w-full text-center'>Become a Founding Seller</NavLink>
                                 </li>
-                                {/* Hide login button in production - mobile version */}
-                                {process.env.REACT_APP_SHOW_LOGIN === 'true' && (
+                                {/* Login hidden by default - set REACT_APP_SHOW_LOGIN=true to enable */}
+                                {(process.env.REACT_APP_SHOW_LOGIN === 'true') && (
                                     <li className='w-full'>
                                         <NavLink to="/auth/login" onClick={() => setToogleMenuResponsive(!ToogleMenuResponsive)} className='btn-secondary w-full text-center'>Log in</NavLink>
                                     </li>
@@ -160,8 +160,8 @@ const Navbar = () => {
                                 <div className="lg:inline-block hidden">
                                     <NavLink to="/founding-sellers" className='btn-primary'>Become a Founding Seller</NavLink>
                                 </div>
-                                {/* Hide login button in production - can be enabled later with REACT_APP_SHOW_LOGIN=true */}
-                                {process.env.REACT_APP_SHOW_LOGIN === 'true' && (
+                                {/* Login hidden by default - set REACT_APP_SHOW_LOGIN=true to enable */}
+                                {(process.env.REACT_APP_SHOW_LOGIN === 'true') && (
                                     <div className="lg:inline-block hidden">
                                         <NavLink to="/auth/login" className='btn-secondary'>Log in</NavLink>
                                     </div>
