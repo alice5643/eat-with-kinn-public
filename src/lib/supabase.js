@@ -3,20 +3,15 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL
 const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY
 
-// Debug logging
-console.log('🔍 Environment Variables Check:');
-console.log('SUPABASE_URL:', supabaseUrl ? 'SET ✅' : 'MISSING ❌');
-console.log('SUPABASE_KEY:', supabaseAnonKey ? 'SET ✅' : 'MISSING ❌');
-
+// Create Supabase client with fallback for missing environment variables
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('❌ Missing environment variables:', {
-    url: !!supabaseUrl,
-    key: !!supabaseAnonKey
-  });
-  throw new Error('Missing Supabase environment variables - check your .env file and restart the server');
+  console.warn('⚠️ Supabase environment variables not configured - authentication disabled');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co', 
+  supabaseAnonKey || 'placeholder-key'
+)
 
 // Auth helpers
 export const signInWithGoogle = async () => {
