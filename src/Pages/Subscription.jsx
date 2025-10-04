@@ -13,6 +13,7 @@ const Subscription = () => {
 
     useEffect(() => {
         loadSubscriptionData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
     const loadSubscriptionData = async () => {

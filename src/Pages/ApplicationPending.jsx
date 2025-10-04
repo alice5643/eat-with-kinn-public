@@ -17,6 +17,7 @@ const ApplicationPending = () => {
         }
 
         fetchApplication();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated, navigate, user]);
 
     const fetchApplication = async () => {

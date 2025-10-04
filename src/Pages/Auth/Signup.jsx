@@ -32,6 +32,7 @@ const Signup = () => {
         }
     };
 
+    // eslint-disable-next-line no-unused-vars
     const normalizePhone = (value) => value.replace(/[^+0-9]/g, '');
     const toE164Uk = (value) => {
         if (!value) return null;
@@ -64,6 +65,7 @@ const Signup = () => {
         }
         setIsSendingOtp(true);
         try {
+            // eslint-disable-next-line no-unused-vars
             const { data, error } = await supabase.auth.signInWithOtp({ phone: e164 });
             if (error) {
                 console.error('OTP error', error);

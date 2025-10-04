@@ -72,7 +72,7 @@ const Login = () => {
         }
         setIsSendingOtp(true)
         try {
-            const { data, error } = await supabase.auth.signInWithOtp({ phone: e164 })
+            const { error } = await supabase.auth.signInWithOtp({ phone: e164 })
             if (error) {
                 console.error('OTP error', error)
                 setOtpMessage('Failed to send code. ' + (error.message || 'Please try again later.'))

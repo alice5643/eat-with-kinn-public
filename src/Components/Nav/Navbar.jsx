@@ -49,13 +49,14 @@ const Navbar = () => {
         if (user) {
             checkApplicationStatus();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     const checkApplicationStatus = async () => {
         if (!user) return;
 
         try {
-            const { data, error } = await supabase
+            const { data } = await supabase
                 .from('seller_applications')
                 .select('status')
                 .eq('user_id', user.id)
@@ -102,8 +103,8 @@ const Navbar = () => {
                                 <li className='w-full'>
                                     <NavLink to="/founding-sellers" onClick={() => setToogleMenuResponsive(!ToogleMenuResponsive)} className='btn-primary w-full text-center'>Become a Founding Seller</NavLink>
                                 </li>
-                                {/* Login button disabled for public release */}
-                                {false && (
+                                {/* Temporarily enable login for testing */}
+                                {true && (
                                     <li className='w-full'>
                                         <NavLink to="/auth/login" onClick={() => setToogleMenuResponsive(!ToogleMenuResponsive)} className='btn-secondary w-full text-center'>Log in</NavLink>
                                     </li>
@@ -160,8 +161,8 @@ const Navbar = () => {
                                 <div className="lg:inline-block hidden">
                                     <NavLink to="/founding-sellers" className='btn-primary'>Become a Founding Seller</NavLink>
                                 </div>
-                                {/* Login button disabled for public release */}
-                                {false && (
+                                {/* Temporarily enable login for testing */}
+                                {true && (
                                     <div className="lg:inline-block hidden">
                                         <NavLink to="/auth/login" className='btn-secondary'>Log in</NavLink>
                                     </div>

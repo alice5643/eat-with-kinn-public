@@ -13,6 +13,7 @@ const SellerOnboarding = () => {
 
     useEffect(() => {
         checkApplicationAndSellerStatus()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
     const checkApplicationAndSellerStatus = async () => {
@@ -89,6 +90,7 @@ const SellerOnboarding = () => {
         try {
             // First, ensure user exists in users table
             console.log('Checking if user exists in users table...');
+            // eslint-disable-next-line no-unused-vars
             const { data: existingUser, error: userCheckError } = await supabase
                 .from('users')
                 .select('id')

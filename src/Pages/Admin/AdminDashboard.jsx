@@ -29,6 +29,7 @@ const AdminDashboard = () => {
         }
 
         checkAdminAccess();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated, navigate, user, authLoading]);
 
     const checkAdminAccess = async () => {

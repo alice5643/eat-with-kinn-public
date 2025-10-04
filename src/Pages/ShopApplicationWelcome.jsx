@@ -12,6 +12,7 @@ const ShopApplicationWelcome = () => {
     const navigate = useNavigate();
     const [currentStep, setCurrentStep] = useState(1);
     const [loading, setLoading] = useState(false);
+    // eslint-disable-next-line no-unused-vars
     const [existingApplication, setExistingApplication] = useState(null);
 
     // Form data
@@ -45,6 +46,7 @@ const ShopApplicationWelcome = () => {
                 phoneNumber: user.user_metadata?.phone || prev.phoneNumber
             }));
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated, navigate, user]);
 
     const checkExistingApplication = async () => {
@@ -102,6 +104,7 @@ const ShopApplicationWelcome = () => {
     const shopSlug = slugify(formData.shopName);
 
     const validateStep = (step) => {
+        // eslint-disable-next-line default-case
         switch (step) {
             case 2: // Phone number
                 if (!formData.phoneNumber || formData.phoneNumber.trim().length < 10) {

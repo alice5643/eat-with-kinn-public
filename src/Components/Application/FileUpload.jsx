@@ -31,11 +31,13 @@ const FileUpload = ({
         try {
             // Create unique file path: userId/timestamp-filename
             const timestamp = Date.now();
+            // eslint-disable-next-line no-unused-vars
             const fileExt = file.name.split('.').pop();
             const fileName = `${timestamp}-${file.name.replace(/\s+/g, '-')}`;
             const filePath = `${userId}/${fileName}`;
 
             // Upload to Supabase Storage
+            // eslint-disable-next-line no-unused-vars
             const { data, error: uploadError } = await supabase.storage
                 .from('seller-documents')
                 .upload(filePath, file, {

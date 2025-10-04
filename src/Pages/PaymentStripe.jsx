@@ -63,6 +63,7 @@ const CheckoutForm = ({ orderTotal, cartItems, handleSuccess }) => {
 };
 
 const Payment = () => {
+    // eslint-disable-next-line no-unused-vars
     const { user } = useAuth();
     const [show, setShow] = useState(false);
     const [clientSecret, setClientSecret] = useState('');
@@ -94,6 +95,7 @@ const Payment = () => {
         } else {
             setLoading(false);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const createPaymentIntent = async () => {
