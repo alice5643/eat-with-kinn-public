@@ -103,12 +103,7 @@ const Navbar = () => {
                                 <li className='w-full'>
                                     <NavLink to="/founding-sellers" onClick={() => setToogleMenuResponsive(!ToogleMenuResponsive)} className='btn-primary w-full text-center'>Become a Founding Seller</NavLink>
                                 </li>
-                                {/* Temporarily enable login for testing */}
-                                {true && (
-                                    <li className='w-full'>
-                                        <NavLink to="/auth/login" onClick={() => setToogleMenuResponsive(!ToogleMenuResponsive)} className='btn-secondary w-full text-center'>Log in</NavLink>
-                                    </li>
-                                )}
+                                {/* Login button hidden for public release */}
                             </>
                         ) : (
                             <>
@@ -161,12 +156,7 @@ const Navbar = () => {
                                 <div className="lg:inline-block hidden">
                                     <NavLink to="/founding-sellers" className='btn-primary'>Become a Founding Seller</NavLink>
                                 </div>
-                                {/* Temporarily enable login for testing */}
-                                {true && (
-                                    <div className="lg:inline-block hidden">
-                                        <NavLink to="/auth/login" className='btn-secondary'>Log in</NavLink>
-                                    </div>
-                                )}
+                                {/* Login button hidden for public release */}
                             </>
                         ) : (
                             <>
