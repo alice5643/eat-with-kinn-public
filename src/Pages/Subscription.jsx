@@ -1,17 +1,28 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { SUBSCRIPTION_PLANS } from '../utils/stripe'
 
 const Subscription = () => {
     const { user } = useAuth()
+    const navigate = useNavigate()
+    const [searchParams] = useSearchParams()
     const [loading, setLoading] = useState(false)
     const [currentSubscription, setCurrentSubscription] = useState(null)
     const [sellerData, setSellerData] = useState(null)
-    const [billingPeriod, setBillingPeriod] = useState('monthly') // 'monthly' or 'yearly'
+
+    // Get billing period from URL or default to yearly
+    const urlPlan = searchParams.get('plan')
+    const urlBilling = searchParams.get('billing')
+    const [billingPeriod, setBillingPeriod] = useState(urlBilling || 'yearly')
 
     useEffect(() => {
+        if (!user) {
+            navigate('/auth/login?redirect=/subscription')
+            return
+        }
         loadSubscriptionData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
@@ -27,39 +38,45 @@ const Subscription = () => {
                 .eq('user_id', user.id)
                 .single()
 
-            if (!seller) {
-                window.location.href = '/seller/onboarding'
-                return
-            }
-
             setSellerData(seller)
 
-            // Get current subscription
-            const { data: subscription } = await supabase
-                .from('subscriptions')
-                .select('*')
-                .eq('seller_id', seller.id)
-                .eq('status', 'active')
-                .single()
+            // Get current subscription if exists
+            if (seller) {
+                const { data: subscription } = await supabase
+                    .from('subscriptions')
+                    .select('*')
+                    .eq('seller_id', seller.id)
+                    .eq('status', 'active')
+                    .single()
 
-            setCurrentSubscription(subscription)
+                setCurrentSubscription(subscription)
+            }
         } catch (error) {
             console.error('Error loading subscription:', error)
         }
     }
 
     const handleSubscribe = async (planTier) => {
-        if (!sellerData) return
+        if (!user) {
+            navigate('/auth/login?redirect=/subscription')
+            return
+        }
 
         setLoading(true)
 
         try {
-            // Call Edge Function to create subscription
-            const { data, error } = await supabase.functions.invoke('create-subscription', {
+            const planConfig = SUBSCRIPTION_PLANS[planTier][billingPeriod]
+
+            // Create Stripe Checkout Session via Edge Function
+            const { data, error } = await supabase.functions.invoke('create-checkout-session', {
                 body: {
-                    sellerId: sellerData.id,
+                    priceId: planConfig.priceId,
                     planTier: planTier,
                     billingPeriod: billingPeriod,
+                    userId: user.id,
+                    userEmail: user.email,
+                    successUrl: `${window.location.origin}/subscription?session_id={CHECKOUT_SESSION_ID}`,
+                    cancelUrl: `${window.location.origin}/subscription`,
                 }
             })
 
@@ -67,13 +84,13 @@ const Subscription = () => {
                 throw error
             }
 
-            // Redirect to Stripe checkout
-            if (data.checkoutUrl) {
-                window.location.href = data.checkoutUrl
+            // Redirect to Stripe Checkout
+            if (data?.url) {
+                window.location.href = data.url
             }
         } catch (error) {
-            console.error('Error creating subscription:', error)
-            alert('Failed to create subscription. Please try again.')
+            console.error('Error creating checkout session:', error)
+            alert('Failed to start checkout. Please try again.')
         } finally {
             setLoading(false)
         }
@@ -83,9 +100,11 @@ const Subscription = () => {
         setLoading(true)
 
         try {
-            const { data, error } = await supabase.functions.invoke('manage-subscription', {
+            // Create Stripe Customer Portal Session
+            const { data, error } = await supabase.functions.invoke('create-portal-session', {
                 body: {
-                    sellerId: sellerData.id,
+                    userId: user.id,
+                    returnUrl: `${window.location.origin}/subscription`,
                 }
             })
 
@@ -93,9 +112,9 @@ const Subscription = () => {
                 throw error
             }
 
-            // Redirect to Stripe billing portal
-            if (data.portalUrl) {
-                window.location.href = data.portalUrl
+            // Redirect to Stripe Customer Portal
+            if (data?.url) {
+                window.location.href = data.url
             }
         } catch (error) {
             console.error('Error opening billing portal:', error)
@@ -107,43 +126,33 @@ const Subscription = () => {
 
     const plans = [
         {
-            tier: 'basic',
-            name: 'Basic',
-            description: 'Perfect for getting started',
+            tier: 'hobbyist',
+            name: 'Kinn Hobbyist',
+            description: 'Home cooks, side hustlers, first-time sellers',
             features: [
-                'Up to 50 orders per month',
-                '15% commission on sales',
-                'Basic analytics',
-                'Email support',
+                'Verified seller badge (safety + trust)',
+                'Get discovered on Kinn marketplace',
+                'Personalised shopfront',
+                'Simple order and product management tools',
+                'Stripe/Apple/Google Pay integration',
+                'In-app chat with buyers',
+                'Access to Kinn community tips & updates',
             ],
             popular: false,
         },
         {
             tier: 'pro',
-            name: 'Pro',
-            description: 'Most popular for growing businesses',
+            name: 'Kinn Pro',
+            description: 'Licensed cooks, micro-bakers, sellers ready to scale',
             features: [
-                'Unlimited orders',
-                '10% commission on sales',
-                'Advanced analytics',
-                'Priority support',
-                'Featured listing',
+                'All Hobbyist features, plus:',
+                'AI Seller Assistant - Menu writing & auto-listing',
+                'Smart Social Generator - Instagram posts & captions',
+                'Priority placement in marketplace search',
+                'Analytics Dashboard - Orders, top products, buyers',
+                'Featured "Pro Kitchen" badge',
             ],
             popular: true,
-        },
-        {
-            tier: 'premium',
-            name: 'Premium',
-            description: 'For established restaurants',
-            features: [
-                'Unlimited orders',
-                '5% commission on sales',
-                'Advanced analytics',
-                '24/7 priority support',
-                'Top featured listing',
-                'Dedicated account manager',
-            ],
-            popular: false,
         },
     ]
 
@@ -154,32 +163,21 @@ const Subscription = () => {
                     <div className="text-center mb-8">
                         <h2 className='text-h2 text-Mblack mb-3'>Choose Your Plan</h2>
                         <p className='text-body-lg text-gray-600 mb-6'>
-                            Select the perfect plan for your business
+                            Select the perfect plan for your business. No commission on sales - just a simple subscription.
                         </p>
 
                         {/* Billing Period Toggle */}
-                        <div className="inline-flex items-center bg-white rounded-full p-1">
+                        <div className="flex items-center justify-center gap-3 mb-8">
+                            <span className={`text-body-md ${billingPeriod === 'monthly' ? 'font-semibold text-Mblack' : 'text-Mgray'}`}>Monthly</span>
                             <button
-                                onClick={() => setBillingPeriod('monthly')}
-                                className={`px-6 py-2 rounded-full font-medium text__14 transition-all ${
-                                    billingPeriod === 'monthly'
-                                        ? 'bg-Mblack text-white'
-                                        : 'text-gray-600 hover:text-Mblack'
-                                }`}
+                                onClick={() => setBillingPeriod(billingPeriod === 'yearly' ? 'monthly' : 'yearly')}
+                                className={`relative w-14 h-7 rounded-full transition-colors ${billingPeriod === 'yearly' ? 'bg-Myellow' : 'bg-gray-300'}`}
                             >
-                                Monthly
+                                <span className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-transform ${billingPeriod === 'yearly' ? 'right-1' : 'left-1'}`}></span>
                             </button>
-                            <button
-                                onClick={() => setBillingPeriod('yearly')}
-                                className={`px-6 py-2 rounded-full font-medium text__14 transition-all ${
-                                    billingPeriod === 'yearly'
-                                        ? 'bg-Mblack text-white'
-                                        : 'text-gray-600 hover:text-Mblack'
-                                }`}
-                            >
-                                Yearly
-                                <span className='ml-2 text-[#FEC51C]'>Save 17%</span>
-                            </button>
+                            <span className={`text-body-md ${billingPeriod === 'yearly' ? 'font-semibold text-Mblack' : 'text-Mgray'}`}>
+                                Yearly <span className="text-green-600 text-sm">(Save 58%)</span>
+                            </span>
                         </div>
                     </div>
 
@@ -251,22 +249,18 @@ const Subscription = () => {
                     )}
 
                     <div className="mt-8 p-6 bg-white rounded-[20px]">
-                        <h5 className='text-h6 text-Mblack mb-3'>Platform Commission Structure</h5>
+                        <h5 className='text-h6 text-Mblack mb-3'>💰 Keep 100% of Your Sales</h5>
                         <p className='text-body-md text-gray-600 mb-4'>
-                            In addition to your subscription, we charge a 10% platform commission on all orders. Your subscription plan determines the seller commission rate.
+                            Unlike other platforms, Kinn doesn't take a commission on your sales. You pay a simple monthly or yearly subscription, and keep all your revenue (minus standard Stripe payment processing fees of 1.5% + 20p).
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div className="p-4 bg-[#FAFAFA] rounded-[12px]">
-                                <h6 className='font-medium text__14 text-Mblack mb-1'>Basic Plan</h6>
-                                <p className='text__12 text-gray-600'>15% seller commission + 10% platform fee</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="p-4 bg-Koffwhite rounded-[12px]">
+                                <h6 className='font-medium text__14 text-Mblack mb-2'>✓ No Commission</h6>
+                                <p className='text__12 text-gray-600'>Keep 100% of your sales revenue</p>
                             </div>
-                            <div className="p-4 bg-[#FAFAFA] rounded-[12px]">
-                                <h6 className='font-medium text__14 text-Mblack mb-1'>Pro Plan</h6>
-                                <p className='text__12 text-gray-600'>10% seller commission + 10% platform fee</p>
-                            </div>
-                            <div className="p-4 bg-[#FAFAFA] rounded-[12px]">
-                                <h6 className='font-medium text__14 text-Mblack mb-1'>Premium Plan</h6>
-                                <p className='text__12 text-gray-600'>5% seller commission + 10% platform fee</p>
+                            <div className="p-4 bg-Koffwhite rounded-[12px]">
+                                <h6 className='font-medium text__14 text-Mblack mb-2'>✓ Simple Pricing</h6>
+                                <p className='text__12 text-gray-600'>Just your subscription + Stripe fees</p>
                             </div>
                         </div>
                     </div>

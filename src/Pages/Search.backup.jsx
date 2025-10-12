@@ -214,7 +214,7 @@ const Search = () => {
   ]
 
   const [ToogleFilter, setToogleFilter] = useState(false)
-  const [showResults] = useState(false) // Hide results - will be enabled when database is connected
+  const [showResults, setShowResults] = useState(false) // Hide results initially
 
   return (
     <Fragment>
@@ -276,16 +276,15 @@ const Search = () => {
                       <input type="text" className='w-full bg-transparent border-none outline-none hover:focus:active:border-none hover:focus:active:outline-none font-medium text__14 text-Mblack' placeholder='Enter your address...' />
                     </div>
                     <button
-                      disabled
-                      className="flex items-center justify-center h-[42px] gap-2 px-4 py-2 rounded-full bg-gray-300 cursor-not-allowed opacity-60"
-                      title="Coming soon - Database integration in progress"
+                      onClick={() => setShowResults(true)}
+                      className="flex items-center justify-center h-[42px] gap-2 px-4 py-2 rounded-full bg-Myellow cursor-pointer hover:bg-yellow-400 transition-colors"
                     >
-                      <img src="./../images/search-normal.svg" alt="" className="opacity-50" />
-                      <div className='font-medium text__16 text-gray-600'>Search</div>
+                      <img src="./../images/search-normal.svg" alt="" />
+                      <div className='font-medium text__16'>Search</div>
                     </button>
                   </div>
                   <p className="text-body-sm-regular text-Mgray mt-4">
-                    Coming soon - We're connecting our database to show you verified local food sellers
+                    We'll show you verified local food sellers near your location
                   </p>
                 </div>
               ) : (

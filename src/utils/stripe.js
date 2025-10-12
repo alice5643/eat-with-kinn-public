@@ -5,60 +5,47 @@ export const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE
 
 // Subscription plan configurations
 export const SUBSCRIPTION_PLANS = {
-  basic: {
+  hobbyist: {
     monthly: {
-      priceId: 'price_basic_monthly', // Replace with actual Stripe price ID
-      amount: 29.99,
-      commissionRate: 15.00, // 15% commission on sales
+      priceId: 'price_1SHT3CAkjLGPFlKZiBypgQzk', // Replace with actual Stripe price ID
+      amount: 10.00,
+      displayAmount: '£10',
     },
     yearly: {
-      priceId: 'price_basic_yearly', // Replace with actual Stripe price ID
-      amount: 299.99,
-      commissionRate: 15.00,
+      priceId: 'price_1SHT3dAkjLGPFlKZ9W6lSn9S', // Replace with actual Stripe price ID
+      amount: 59.00, // £4.99/month * 12
+      displayAmount: '£59.00',
+      monthlyEquivalent: '£4.99/month',
     },
   },
   pro: {
     monthly: {
-      priceId: 'price_pro_monthly',
-      amount: 79.99,
-      commissionRate: 10.00, // 10% commission on sales
+      priceId: 'price_1SHT3wAkjLGPFlKZmrTXpwjI',
+      amount: 15.00,
+      displayAmount: '£15.00',
     },
     yearly: {
-      priceId: 'price_pro_yearly',
-      amount: 799.99,
-      commissionRate: 10.00,
-    },
-  },
-  premium: {
-    monthly: {
-      priceId: 'price_premium_monthly',
-      amount: 149.99,
-      commissionRate: 5.00, // 5% commission on sales
-    },
-    yearly: {
-      priceId: 'price_premium_yearly',
-      amount: 1499.99,
-      commissionRate: 5.00,
+      priceId: 'price_1SHT4WAkjLGPFlKZJPgTL4qr',
+      amount: 99.00, // £12.50/month * 12
+      displayAmount: '£99.00',
+      monthlyEquivalent: '£12.50/month',
     },
   },
 };
 
-// Platform commission rate (always 10%)
-export const PLATFORM_COMMISSION_RATE = 10.00;
+// No platform commission - sellers keep all revenue except payment processing fees
+export const PLATFORM_COMMISSION_RATE = 0.00;
 
-// Calculate commission breakdown for an order
-export const calculateCommissions = (mealPrice, sellerCommissionRate) => {
-  const platformCommission = (mealPrice * PLATFORM_COMMISSION_RATE) / 100;
-  const sellerCommission = (mealPrice * sellerCommissionRate) / 100;
-  const sellerPayout = mealPrice - sellerCommission;
-  const totalCharge = mealPrice + platformCommission;
+// Calculate seller payout (no commission, only Stripe fees)
+export const calculateSellerPayout = (mealPrice) => {
+  // Stripe fee: 1.5% + 20p for European cards
+  const stripeFee = (mealPrice * 0.015) + 0.20;
+  const sellerPayout = mealPrice - stripeFee;
 
   return {
     mealPrice: parseFloat(mealPrice.toFixed(2)),
-    platformCommission: parseFloat(platformCommission.toFixed(2)),
-    sellerCommission: parseFloat(sellerCommission.toFixed(2)),
+    stripeFee: parseFloat(stripeFee.toFixed(2)),
     sellerPayout: parseFloat(sellerPayout.toFixed(2)),
-    totalCharge: parseFloat(totalCharge.toFixed(2)),
   };
 };
 

@@ -12,7 +12,13 @@ const SellerOnboarding = () => {
     const [checkingApplication, setCheckingApplication] = useState(true)
 
     useEffect(() => {
-        checkApplicationAndSellerStatus()
+        // Check if coming back from Stripe onboarding
+        const urlParams = new URLSearchParams(window.location.search)
+        if (urlParams.get('return') === 'stripe' && user) {
+            checkConnectAccountStatus()
+        } else {
+            checkApplicationAndSellerStatus()
+        }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
@@ -76,6 +82,51 @@ const SellerOnboarding = () => {
             console.error('Error:', error)
         } finally {
             setCheckingApplication(false)
+        }
+    }
+
+    const checkConnectAccountStatus = async () => {
+        if (!user) return
+
+        setCheckingApplication(true)
+
+        try {
+            console.log('[DEBUG] Checking Connect account status for user:', user.id)
+
+            // Call Edge Function to check Connect account status
+            const { data, error } = await supabase.functions.invoke('check-connect-status', {
+                body: { userId: user.id }
+            })
+
+            console.log('[DEBUG] Edge function response:', { data, error })
+
+            if (error) {
+                console.error('[ERROR] Error checking Connect status:', error)
+                alert(`Failed to check Connect status: ${error.message || JSON.stringify(error)}`)
+                // Fall back to regular status check
+                checkApplicationAndSellerStatus()
+                return
+            }
+
+            console.log('[SUCCESS] Connect status check result:', data)
+            console.log('[DEBUG] Onboarding complete?', data?.onboardingComplete)
+            console.log('[DEBUG] Charges enabled?', data?.chargesEnabled)
+            console.log('[DEBUG] Payouts enabled?', data?.payoutsEnabled)
+
+            // If onboarding is complete, reload to show success message
+            if (data && data.onboardingComplete) {
+                console.log('[SUCCESS] Onboarding is complete! Redirecting...')
+                window.location.href = '/seller/onboarding?complete=true'
+            } else {
+                console.log('[INFO] Onboarding not yet complete, showing regular page')
+                // Onboarding still incomplete, show regular page
+                checkApplicationAndSellerStatus()
+            }
+        } catch (error) {
+            console.error('[ERROR] Exception checking Connect status:', error)
+            alert(`Exception: ${error.message}`)
+            // Fall back to regular status check
+            checkApplicationAndSellerStatus()
         }
     }
 

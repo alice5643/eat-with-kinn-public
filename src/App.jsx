@@ -12,6 +12,7 @@ import Homepage from './Pages/Homepage';
 import Privacy from './Pages/Privacy';
 import Terms from './Pages/Terms';
 import FoundingSellers from './Pages/FoundingSellers';
+import KinnSeller from './Pages/KinnSeller';
 import Search from './Pages/Search';
 import DetailRestaurant from './Pages/DetailRestaurant';
 import Profile from './Pages/Profile';
@@ -40,6 +41,7 @@ const App = () => {
       <Route path="" element={<DefaultLayout />}>
         <Route index element={<Homepage />} />
         <Route path="founding-sellers" element={<FoundingSellers />} />
+        <Route path="kinn-seller" element={<KinnSeller />} />
         <Route path="search" element={<Search />} />
         <Route path="detail/restaurant" element={<DetailRestaurant />} />
         <Route path="profile" element={<Profile />} />

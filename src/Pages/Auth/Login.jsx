@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react'
 import { NavLink, useNavigate, useSearchParams } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext'
-import { supabase } from '../../lib/supabase'
 
 
 const Login = () => {
@@ -14,12 +13,6 @@ const Login = () => {
     const { signInWithGoogle, signInWithPassword, isAuthenticated } = useAuth()
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
-
-    // Phone login state
-    const [usePhone, setUsePhone] = useState(false)
-    const [phoneNumber, setPhoneNumber] = useState('')
-    const [isSendingOtp, setIsSendingOtp] = useState(false)
-    const [otpMessage, setOtpMessage] = useState('')
 
     // Email/password login state
     const [email, setEmail] = useState('')
@@ -46,46 +39,6 @@ const Login = () => {
             console.error('Error signing in with Google:', error);
         }
     };
-
-    const toE164Uk = (value) => {
-        if (!value) return null;
-        let v = value.replace(/\s+/g, '');
-        v = v.replace(/[^+0-9]/g, '');
-        if (v.startsWith('07')) return '+44' + v.slice(1);
-        if (v.startsWith('44')) return '+' + v;
-        if (v.startsWith('+44')) return v;
-        return null;
-    };
-
-    const isValidUKPhone = (value) => {
-        const e164 = toE164Uk(value);
-        if (!e164) return false;
-        return /^\+447\d{9}$/.test(e164);
-    };
-
-    const handleSendPhoneOtp = async () => {
-        setOtpMessage('')
-        const e164 = toE164Uk(phoneNumber)
-        if (!isValidUKPhone(phoneNumber)) {
-            setOtpMessage('Please enter a valid UK phone number (e.g. +447XXXXXXXXX or 07XXXXXXXXX).')
-            return
-        }
-        setIsSendingOtp(true)
-        try {
-            const { error } = await supabase.auth.signInWithOtp({ phone: e164 })
-            if (error) {
-                console.error('OTP error', error)
-                setOtpMessage('Failed to send code. ' + (error.message || 'Please try again later.'))
-            } else {
-                setOtpMessage('A one-time code has been sent to your phone. Follow the SMS to complete sign in.')
-            }
-        } catch (err) {
-            console.error(err)
-            setOtpMessage('Unexpected error sending code.')
-        } finally {
-            setIsSendingOtp(false)
-        }
-    }
 
     const handleEmailLogin = async (e) => {
         e.preventDefault()
@@ -131,15 +84,7 @@ const Login = () => {
                 <p>Don't have an account? <NavLink to="/auth/signup" className='text-Myellow '>Sign Up</NavLink></p>
             </div>
 
-            <div className="mb-4 text-sm text-center">
-                <button onClick={() => setUsePhone(false)} className={`px-3 py-2 ${!usePhone ? 'font-semibold' : 'text-gray-500'}`}>Log in with email</button>
-                <span className="mx-2 text-gray-300">|</span>
-                <button onClick={() => setUsePhone(true)} className={`px-3 py-2 ${usePhone ? 'font-semibold' : 'text-gray-500'}`}>Log in with phone</button>
-            </div>
-
-            {!usePhone ? (
-                <>
-                    <Form.Group className="mb-3" controlId="login-email-unique">
+            <Form.Group className="mb-3" controlId="login-email-unique">
                         <Form.Label className='font-normal text__14 text-[#A3A3A3]'>Email</Form.Label>
                         <Form.Control
                             type="email"
@@ -197,26 +142,6 @@ const Login = () => {
                             <span className='font-medium text__14 text-Mblack'>Continue with Google</span>
                         </button>
                     </div>
-                </>
-            ) : (
-                <div>
-                    <label className='font-normal text__14 text-[#A3A3A3]'>Phone number</label>
-                    <div className='flex gap-3'>
-                        <input
-                            type='tel'
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                            placeholder='+44 7XXX XXXXXX'
-                            className='w-full px-4 h-[54px] rounded-[20px] text-Mblack bg-[#FAFAFA] border border-solid !border-[#F5F5F5] outline-none focus:!border-[#FEC51C] placeholder:text-[#A3A3A3] text-body-md'
-                        />
-                        <button onClick={handleSendPhoneOtp} className='inline-block px-4 py-3 rounded-[20px] bg-Mblack text-white'>
-                            {isSendingOtp ? 'Sending...' : 'Send code'}
-                        </button>
-                    </div>
-                    {otpMessage && <p className='text-body-sm text-red-600 mt-2'>{otpMessage}</p>}
-                    <p className='text-body-sm text-gray-500 mt-2'>We will send a one-time code to your phone to complete sign in.</p>
-                </div>
-            )}
         </Fragment>
     )
 }
