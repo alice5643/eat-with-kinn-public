@@ -11,9 +11,11 @@ const Subscription = () => {
     const [searchParams] = useSearchParams()
     const [loading, setLoading] = useState(false)
     const [currentSubscription, setCurrentSubscription] = useState(null)
+    // eslint-disable-next-line no-unused-vars
     const [sellerData, setSellerData] = useState(null)
 
     // Get billing period from URL or default to yearly
+    // eslint-disable-next-line no-unused-vars
     const urlPlan = searchParams.get('plan')
     const urlBilling = searchParams.get('billing')
     const [billingPeriod, setBillingPeriod] = useState(urlBilling || 'yearly')
