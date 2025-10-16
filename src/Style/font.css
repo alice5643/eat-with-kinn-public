@@ -2,69 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Typography System - Body Text Styles with Poppins */
+/* Typography System - Body Text Styles with Inter (font-sans) */
 
 /* Semi Bold variants */
 .text-body-xl-semibold {
-    @apply font-Poppins text-[18px] font-semibold leading-[1.4]
+    @apply font-sans text-[18px] font-semibold leading-[1.4]
 }
 
 .text-body-lg-semibold {
-    @apply font-Poppins text-[16px] font-semibold leading-[1.4]
+    @apply font-sans text-[16px] font-semibold leading-[1.4]
 }
 
 .text-body-md-semibold {
-    @apply font-Poppins text-[14px] font-semibold leading-[1.4]
+    @apply font-sans text-[14px] font-semibold leading-[1.4]
 }
 
 .text-body-sm-semibold {
-    @apply font-Poppins text-[12px] font-semibold leading-[1.4]
+    @apply font-sans text-[12px] font-semibold leading-[1.4]
 }
 
 .text-body-xs-semibold {
-    @apply font-Poppins text-[10px] font-semibold leading-[1.4]
+    @apply font-sans text-[10px] font-semibold leading-[1.4]
 }
 
 /* Medium variants */
 .text-body-xl-medium {
-    @apply font-Poppins text-[18px] font-medium leading-[1.4]
+    @apply font-sans text-[18px] font-medium leading-[1.4]
 }
 
 .text-body-lg-medium {
-    @apply font-Poppins text-[16px] font-medium leading-[1.4]
+    @apply font-sans text-[16px] font-medium leading-[1.4]
 }
 
 .text-body-md-medium {
-    @apply font-Poppins text-[14px] font-medium leading-[1.4]
+    @apply font-sans text-[14px] font-medium leading-[1.4]
 }
 
 .text-body-sm-medium {
-    @apply font-Poppins text-[12px] font-medium leading-[1.4]
+    @apply font-sans text-[12px] font-medium leading-[1.4]
 }
 
 .text-body-xs-medium {
-    @apply font-Poppins text-[10px] font-medium leading-[1.4]
+    @apply font-sans text-[10px] font-medium leading-[1.4]
 }
 
 /* Regular variants */
 .text-body-xl-regular {
-    @apply font-Poppins text-[18px] font-normal leading-[1.4]
+    @apply font-sans text-[18px] font-normal leading-[1.4]
 }
 
 .text-body-lg-regular {
-    @apply font-Poppins text-[16px] font-normal leading-[1.4]
+    @apply font-sans text-[16px] font-normal leading-[1.4]
 }
 
 .text-body-md-regular {
-    @apply font-Poppins text-[14px] font-normal leading-[1.4]
+    @apply font-sans text-[14px] font-normal leading-[1.4]
 }
 
 .text-body-sm-regular {
-    @apply font-Poppins text-[12px] font-normal leading-[1.4]
+    @apply font-sans text-[12px] font-normal leading-[1.4]
 }
 
 .text-body-xs-regular {
-    @apply font-Poppins text-[10px] font-normal leading-[1.4]
+    @apply font-sans text-[10px] font-normal leading-[1.4]
 }
 
 /* Legacy text size classes (keeping for backward compatibility) */
@@ -109,49 +109,49 @@
 
 /* Headline Styles */
 
-/* H1 - Uses Macondo font */
+/* H1 - Switzer Variable (font-display) */
 .text-h1 {
-    @apply font-Macondo text-[32px] md:text-[48px] lg:text-[64px] font-normal leading-[1.2]
+    @apply font-display text-[32px] md:text-[48px] lg:text-[64px] font-semibold leading-[1.2]
 }
 
-/* H2-H6 - Use Poppins with semi-bold */
+/* H2-H6 - Switzer Variable */
 .text-h2 {
-    @apply font-Poppins text-[28px] md:text-[40px] lg:text-[56px] font-semibold leading-[1.2]
+    @apply font-display text-[28px] md:text-[40px] lg:text-[56px] font-semibold leading-[1.2]
 }
 
 .text-h3 {
-    @apply font-Poppins text-[24px] md:text-[32px] lg:text-[48px] font-semibold leading-[1.2]
+    @apply font-display text-[24px] md:text-[32px] lg:text-[48px] font-semibold leading-[1.2]
 }
 
 .text-h4 {
-    @apply font-Poppins text-[20px] md:text-[24px] lg:text-[32px] font-semibold leading-[1.2]
+    @apply font-display text-[20px] md:text-[24px] lg:text-[32px] font-semibold leading-[1.2]
 }
 
 .text-h5 {
-    @apply font-Poppins text-[18px] md:text-[20px] lg:text-[24px] font-semibold leading-[1.2]
+    @apply font-display text-[18px] md:text-[20px] lg:text-[24px] font-semibold leading-[1.2]
 }
 
 .text-h6 {
-    @apply font-Poppins text-[16px] md:text-[18px] lg:text-[20px] font-semibold leading-[1.2]
+    @apply font-display text-[16px] md:text-[18px] lg:text-[20px] font-semibold leading-[1.2]
 }
 
-/* H2-H6 Normal Weight Variants - Use Poppins with font-normal */
+/* H2-H6 Normal Weight Variants - Switzer Variable */
 .text-h2-normal {
-    @apply font-Poppins text-[28px] md:text-[40px] lg:text-[56px] font-normal leading-[1.2]
+    @apply font-display text-[28px] md:text-[40px] lg:text-[56px] font-normal leading-[1.2]
 }
 
 .text-h3-normal {
-    @apply font-Poppins text-[24px] md:text-[32px] lg:text-[48px] font-normal leading-[1.2]
+    @apply font-display text-[24px] md:text-[32px] lg:text-[48px] font-normal leading-[1.2]
 }
 
 .text-h4-normal {
-    @apply font-Poppins text-[20px] md:text-[24px] lg:text-[32px] font-normal leading-[1.2]
+    @apply font-display text-[20px] md:text-[24px] lg:text-[32px] font-normal leading-[1.2]
 }
 
 .text-h5-normal {
-    @apply font-Poppins text-[18px] md:text-[20px] lg:text-[24px] font-normal leading-[1.2]
+    @apply font-display text-[18px] md:text-[20px] lg:text-[24px] font-normal leading-[1.2]
 }
 
 .text-h6-normal {
-    @apply font-Poppins text-[16px] md:text-[18px] lg:text-[20px] font-normal leading-[1.2]
+    @apply font-display text-[16px] md:text-[18px] lg:text-[20px] font-normal leading-[1.2]
 }

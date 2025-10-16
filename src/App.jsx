@@ -8,17 +8,18 @@ import { useEffect } from 'react';
 
 import DefaultLayout from './Layouts/DefaultLayout';
 import AuthLayout from './Layouts/AuthLayout';
-import Homepage from './Pages/Homepage';
+import Homepage from './domains/home/pages/Homepage';
 import Privacy from './Pages/Privacy';
 import Terms from './Pages/Terms';
+import OurMission from './domains/home/pages/OurMissionPage';
 import FoundingSellers from './Pages/FoundingSellers';
-import KinnSeller from './Pages/KinnSeller';
+import KinnSeller from './domains/seller/pages/KinnSeller';
 import Search from './Pages/Search';
 import DetailRestaurant from './Pages/DetailRestaurant';
 import Profile from './Pages/Profile';
 import Orders from './Pages/Orders';
 import Favourites from './Pages/Favourites';
-import Settings from './Pages/Settings';
+import Settings from './Pages/NotificationSettings';
 import Help from './Pages/Help';
 import Cart from './Pages/Cart';
 import Payment from './Pages/PaymentStripe';
@@ -58,6 +59,7 @@ const App = () => {
         <Route path="admin" element={<AdminDashboard />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="terms" element={<Terms />} />
+        <Route path="our-mission" element={<OurMission />} />
       </Route>
       <Route path="auth" element={<AuthLayout />}>
         <Route path="login" element={<Login />} />
