@@ -500,3 +500,71 @@ section {
 .radioPayment:checked ~ label label div {
     @apply !opacity-100;
 }
+
+@layer components {
+  .hero-bubble {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(0);
+    opacity: 0.55;
+    background: radial-gradient(circle at 30% 30%, rgba(242,183,80,0.35), transparent 70%);
+  }
+
+  .hero-bubble--one {
+    top: -60px;
+    right: -40px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle at 30% 30%, rgba(242,183,80,0.35), transparent 70%);
+  }
+
+  .hero-bubble--two {
+    bottom: -50px;
+    left: 5%;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle at 70% 40%, rgba(91,111,175,0.25), transparent 65%);
+  }
+
+  .hero-bubble--three {
+    top: 20%;
+    left: 55%;
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle at 40% 40%, rgba(216,140,111,0.28), transparent 75%);
+  }
+}
+
+@layer utilities {
+  @keyframes float-slow {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(-12px, 18px, 0) scale(1.05); }
+  }
+
+  @keyframes float-slower {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(16px, -14px, 0) scale(0.95); }
+  }
+
+  .float-slow {
+    animation: float-slow 14s ease-in-out infinite;
+  }
+
+  .float-slower {
+    animation: float-slower 18s ease-in-out infinite;
+  }
+
+  .float-delayed {
+    animation: float-slow 16s ease-in-out infinite;
+    animation-delay: 1.2s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .float-slow,
+    .float-slower,
+    .float-delayed {
+      animation: none;
+      opacity: 0.3;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import HeroDecor from '../components/HeroDecor'
 
 const TypewriterHeadline = ({ texts, speed = 45, pauseDuration = 2000, className = '' }) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
@@ -128,8 +129,9 @@ const Homepage = () => {
     <Fragment>
       <main className="bg-brand-cream">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-brand-cream via-brand-stone/35 to-white text-brand-forest">
-          <div className="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-16 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <section className="relative bg-gradient-to-br from-brand-cream via-brand-stone/35 to-white text-brand-forest">
+          <HeroDecor />
+          <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 py-16 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-3 rounded-full bg-white/70 px-4 py-2 text-sm font-medium text-brand-forest shadow-lg backdrop-blur">
                 <span className="inline-block h-2 w-2 rounded-full bg-brand-honey badge-dot" />
@@ -143,6 +145,9 @@ const Homepage = () => {
                   ]} 
                 />
               </h1>
+              <p className="font-hand text-brand-slate text-lg">
+                Your Kinnchen awaits.
+              </p>
               <p className="text-lg text-brand-forest/80 sm:text-xl">
                 Fresh food, baked goods, and treats from local kitchens, bakers, and caterers — all FSA-verified for your peace of mind. Join passionate Kinn Masters building successful food businesses.
               </p>

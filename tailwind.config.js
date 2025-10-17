@@ -6,10 +6,13 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
-      General: ["General Sans", "sans-serif"],
-      Poppins: ["Poppins", "sans-serif"],
-      Macondo: ["Macondo", "cursive"],
-      Kalam: ["Kalam", "cursive"],
+      sans: ['Inter', ...defaultTheme.fontFamily.sans],
+      display: ['"Switzer Variable"', 'Switzer', 'Inter', ...defaultTheme.fontFamily.sans],
+      hand: ['"Sora Script"', 'Sora', 'cursive'],
+      General: ['General Sans', 'sans-serif'],
+      Poppins: ['Poppins', 'sans-serif'],
+      Macondo: ['Macondo', 'cursive'],
+      Kalam: ['Kalam', 'cursive'],
     },
     fontSize: {
       // Body text styles from your typography system
@@ -58,7 +61,16 @@ module.exports = {
       xs: "576px",
       ...defaultTheme.screens,
     },
-    extend: {},
+    extend: {
+      colors: {
+        'brand-terracotta': '#D88C6F',
+        'brand-forest': '#2F4730',
+        'brand-cream': '#F7F1E6',
+        'brand-stone': '#E7DFD4',
+        'brand-slate': '#5B6FAF',
+        'brand-honey': '#F2B750',
+      },
+    },
   },
   plugins: [],
 };
